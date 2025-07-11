@@ -10,6 +10,8 @@ import { createRoomRoute } from "./http/routes/create-room.ts";
 import { getRoomQuestionsRoute } from "./http/routes/get-room-question.ts";
 import { getRoomsRoute } from "./http/routes/get-rooms.ts";
 import { createQuestionRoute } from "./http/routes/create-question.ts";
+import { uploadAudioRoute } from "./http/routes/upload-audio.ts";
+import fastifyMultipart from "@fastify/multipart";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -24,9 +26,11 @@ app.get("/health", () => {
   return "OK";
 });
 
+app.register(fastifyMultipart);
 app.register(getRoomsRoute);
 app.register(createRoomRoute);
 app.register(getRoomQuestionsRoute);
 app.register(createQuestionRoute);
+app.register(uploadAudioRoute);
 
 app.listen({ port: env.PORT });
