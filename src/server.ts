@@ -19,6 +19,8 @@ app.register(fastifyCors, {
   origin: "http://localhost:5173",
 });
 
+app.register(fastifyMultipart);
+
 app.setSerializerCompiler(serializerCompiler);
 app.setValidatorCompiler(validatorCompiler);
 
@@ -26,7 +28,6 @@ app.get("/health", () => {
   return "OK";
 });
 
-app.register(fastifyMultipart);
 app.register(getRoomsRoute);
 app.register(createRoomRoute);
 app.register(getRoomQuestionsRoute);
